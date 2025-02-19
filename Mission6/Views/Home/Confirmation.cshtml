@@ -1,8 +1,18 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿@* 
+    For more information on enabling MVC for empty projects, visit 
+    https://go.microsoft.com/fwlink/?LinkID=397860 
 *@
-@{
-}
+
 @model MovieFormModel
 
-</h2>Thank you for submitting a movie</h2>
+<!-- Confirmation Message -->
+<div class="container text-center mt-5">
+
+    <h2 class="text-success">Thank You for Submitting a Movie!</h2>
+    <p class="lead">Your movie <strong>@Model.Title</strong> has been successfully added to the collection.</p>
+
+    <!-- Return Button -->
+    <a class="btn btn-primary mt-4" asp-controller="Home" asp-action="Index">
+        Back to Movie List
+    </a>
+</div>

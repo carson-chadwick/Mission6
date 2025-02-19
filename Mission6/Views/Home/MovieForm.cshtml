@@ -19,18 +19,6 @@
         </div>
  *@
 
-        <div class="mb-3">
-        <select asp-for="CategoryId" required>
-            <option value="">Select a Category </option>
-            @foreach (Category c in ViewBag.Categories)
-            {
-                <option value="@c.CategoryId">@c.CategoryName</option>
-            }
-            </select>
-        </div>
-
-
-
         <!-- Title (Required) -->
         <div class="mb-3">
             <label asp-for="Title" class="form-label"></label>
@@ -49,6 +37,17 @@
         <div class="mb-3">
             <label asp-for="Director" class="form-label"></label>
             <input asp-for="Director" class="form-control">
+        </div>
+        <!-- Category-->
+        <div class="mb-3">
+            <label asp-for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-select" required>
+                <option value="">Select a Category </option>
+                @foreach (Category c in ViewBag.Categories)
+                {
+                    <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select>
         </div>
 
         <!-- Rating (Dropdown) -->
@@ -84,7 +83,7 @@
             <label asp-for="Plex" class="form-label">Copied To Plex</label>
             <select asp-for="Plex" class="form-select" required>
                 <option value=0>No</option>
-                <option value=1>True</option>
+                <option value=1>Yes</option>
             </select>
         </div>
 

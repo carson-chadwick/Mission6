@@ -1,14 +1,34 @@
 ﻿@{
     ViewData["Title"] = "Get to Know Joel";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Click here to visit Quick Wits Comedy where Joel performs.</p>
-<a href=" https://www.qwcomedy.com/">Visit Quick Wits Comedy</a>
-<br />
-<p>Click here to visit Joel's podcast called Baconsale.'</p>
-<a href="https://baconsale.com/">Visit Bacon Sale</a>
-<br />
-<a href="https://baconsale.com/">
-    <img src="/images/baconsalekate.jpg" alt="Clickable Image" width="200">
-</a>
+<!-- Page Title -->
+<div class="text-center mb-4">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<!-- Card for Quick Wits Comedy link -->
+<div class="card mb-4">
+    <div class="card-body text-center">
+        <h5 class="card-title">Visit Quick Wits Comedy</h5>
+        <p class="card-text">Click below to visit Quick Wits Comedy where Joel performs.</p>
+        <a href="https://www.qwcomedy.com/" class="btn btn-primary">Visit Quick Wits Comedy</a>
+    </div>
+</div>
+
+<!-- Card for Baconsale podcast link -->
+<div class="card mb-4">
+    <div class="card-body text-center">
+        <h5 class="card-title">Visit Baconsale</h5>
+        <p class="card-text">Click below to visit Joel's podcast called Baconsale.</p>
+        <a href="https://baconsale.com/" class="btn btn-secondary">Visit Baconsale</a>
+    </div>
+</div>
+
+<!-- Clickable Image Section -->
+<div class="text-center">
+    <p>Click below to learn more about Baconsale:</p>
+    <a href="https://baconsale.com/">
+        <img src="/images/baconsalekate.jpg" alt="Clickable Image" class="img-fluid" width="200">
+    </a>
+</div>

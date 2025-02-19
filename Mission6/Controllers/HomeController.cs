@@ -74,7 +74,7 @@ namespace Mission6.Controllers
         [HttpPost]
         public IActionResult Edit(MovieFormModel updatedInfo)
         {
-            git_context.Update(updatedInfo);
+            _context.Update(updatedInfo);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
