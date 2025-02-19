@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Mission06_Chadwick.Models;
 using Mission6.Models;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Mission6.Controllers
 {
@@ -15,7 +18,12 @@ namespace Mission6.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            //Linq
+            var movies = _context.Movies
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title).ToList();
+            return View(movies);
+           
         }
 
         public IActionResult GetToKnowJoel()
@@ -26,6 +34,8 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
             return View(new MovieFormModel());  // Show empty form on GET request
         }
 
@@ -37,15 +47,57 @@ namespace Mission6.Controllers
                 _context.Movies.Add(response); // Add movie to the database
                 _context.SaveChanges(); // Save changes
 
-                TempData["SuccessMessage"] = "Movie added successfully!"; // Show success message
-
-                return RedirectToAction("MovieForm", response); // Show confirmation page
+                return View("Confirmation", response); // Show confirmation page
             }
             else
             {
-                return View(response); // Return the form with errors if invalid
+                ViewBag.Categories = _context.Categories
+                    .OrderBy(x => x.CategoryId).ToList();
+
+                return View(response);
             }
+
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName).ToList();
+
+            return View("MovieForm", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MovieFormModel updatedInfo)
+        {
+            git_context.Update(updatedInfo);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(MovieFormModel movieFormInput)
+        {
+            _context.Movies.Remove(movieFormInput);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
 

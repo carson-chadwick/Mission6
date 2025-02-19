@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission6.Models
 {
@@ -6,10 +7,13 @@ namespace Mission6.Models
     {
         [Key]
         [Required]
-        public int MovieID { get; set; }
+        public int MovieId { get; set; }
 
+
+        [ForeignKey("CategoryId")]
         [Required]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public Mission06_Chadwick.Models.Category? Category { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -18,15 +22,19 @@ namespace Mission6.Models
         [Range(1888, 2100, ErrorMessage = "Please enter a valid year.")]
         public int Year { get; set; }
 
-        [Required]
-        public string Director { get; set; }
+        public string? Director { get; set; } //Optional
+
+   
+        public string? Rating { get; set; } //Optional
 
         [Required]
-        public string Rating { get; set; }
-
-        public bool? Edited { get; set; }  // Optional (Nullable)
+        public bool Edited { get; set; }  
 
         public string? LentTo { get; set; } // Optional
+
+        [Required]
+        [Column("CopiedToPlex")]
+        public string Plex { get; set; }
 
         [MaxLength(25, ErrorMessage = "Notes cannot exceed 25 characters.")]
         public string? Notes { get; set; } // Optional

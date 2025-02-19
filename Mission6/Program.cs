@@ -1,5 +1,6 @@
 using Mission6.Models;
 using Microsoft.EntityFrameworkCore;
+using Mission06_Chadwick.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

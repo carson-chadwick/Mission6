@@ -1,31 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Movie Form";
-}
+﻿@using Mission06_Chadwick.Models
 
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
 </div>
 
 @model Mission6.Models.MovieFormModel
-<!-- Success Alert -->
-@if (TempData["SuccessMessage"] != null)
-{
-    <script>
-        window.onload = function() {
-            alert("@TempData["SuccessMessage"]");
-        };
-    </script>
-}
+
 
 <div class="container mt-4">
     <h2>Movie Form</h2>
-    <form asp-action="MovieForm" method="post">
+    <form method="post">
+        <input type="hidden" asp-for="MovieId" />
         <!-- Category (Required) -->
-        <div class="mb-3">
+@*         <div class="mb-3">
             <label asp-for="Category" class="form-label"></label>
             <input asp-for="Category" class="form-control" required>
             <span asp-validation-for="Category" class="text-danger"></span>
         </div>
+ *@
+
+        <div class="mb-3">
+        <select asp-for="CategoryId" required>
+            <option value="">Select a Category </option>
+            @foreach (Category c in ViewBag.Categories)
+            {
+                <option value="@c.CategoryId">@c.CategoryName</option>
+            }
+            </select>
+        </div>
+
+
 
         <!-- Title (Required) -->
         <div class="mb-3">
@@ -41,17 +45,16 @@
             <span asp-validation-for="Year" class="text-danger"></span>
         </div>
 
-        <!-- Director (Required) -->
+        <!-- Director-->
         <div class="mb-3">
             <label asp-for="Director" class="form-label"></label>
-            <input asp-for="Director" class="form-control" required>
-            <span asp-validation-for="Director" class="text-danger"></span>
+            <input asp-for="Director" class="form-control">
         </div>
 
         <!-- Rating (Dropdown) -->
         <div class="mb-3">
             <label asp-for="Rating" class="form-label"></label>
-            <select asp-for="Rating" class="form-select" required>
+            <select asp-for="Rating" class="form-select">
                 <option value="">Select a Rating</option>
                 <option value="G">G</option>
                 <option value="PG">PG</option>
@@ -65,9 +68,8 @@
         <div class="mb-3">
             <label asp-for="Edited" class="form-label">Edited</label>
             <select asp-for="Edited" class="form-select">
-                <option value="">Select an option</option>
-                <option value="true">Yes</option>
                 <option value="false">No</option>
+                <option value="true">Yes</option>
             </select>
         </div>
 
@@ -76,6 +78,18 @@
             <label asp-for="LentTo" class="form-label"></label>
             <input asp-for="LentTo" class="form-control">
         </div>
+
+        <!-- Coppied to Plex (Yes/No Checkbox) -->
+        <div class="mb-3">
+            <label asp-for="Plex" class="form-label">Copied To Plex</label>
+            <select asp-for="Plex" class="form-select" required>
+                <option value=0>No</option>
+                <option value=1>True</option>
+            </select>
+        </div>
+
+
+
 
         <!-- Notes (Optional, Max 25 Characters) -->
         <div class="mb-3">
